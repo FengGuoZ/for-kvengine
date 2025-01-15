@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <cassert>
 #include "list.h"
 #include "test_common.h"
@@ -149,6 +150,34 @@ void TestInsertAndRemove() {
     cout << list.ToString() << endl;
 }
 
+void TestTraverse() {
+    CASE_TITLE();
+
+    List<int> list;
+    for (int i = 0; i < 10; ++i) {
+        list.PushBack(i);
+    }
+    cout << list.ToString() << endl;
+
+    //in sequence
+    List<int>::ListNode* p = list.GetHead();
+    cout << "in sequence: ";
+    while(p) {
+        cout << p->data << " ";
+        p = list.GetNext(p);
+    }
+    cout << endl;
+
+    //in reverse
+    p = list.GetTail();
+    cout << "in reverse: ";
+    while(p) {
+        cout << p->data << " ";
+        p = list.GetPrev(p);
+    }
+    cout << endl;
+}
+
 void TestClearList() {
     CASE_TITLE();
 
@@ -180,6 +209,8 @@ int main() {
 
     TestGetAndSet();
     TestInsertAndRemove();
+
+    TestTraverse();
 
     TestClearList();
 
